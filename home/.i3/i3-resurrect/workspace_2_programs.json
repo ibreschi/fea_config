@@ -1,0 +1,11 @@
+[
+  {
+    "command": [
+      "/snap/slack/48/usr/lib/slack/slack",
+      "--no-sandbox",
+      "--executed-from=/home/ibreschi",
+      "--pid=9213"
+    ],
+    "working_directory": "/home/ibreschi"
+  }
+]

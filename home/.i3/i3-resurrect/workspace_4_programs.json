@@ -1,0 +1,9 @@
+[
+  {
+    "command": [
+      "/usr/bin/google-chrome",
+      "--enable-crashpad"
+    ],
+    "working_directory": "/home/ibreschi"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {
+    "command": [
+      "/home/ibreschi/.cargo/bin/alacritty"
+    ],
+    "working_directory": "/home/ibreschi/git"
+  }
+]

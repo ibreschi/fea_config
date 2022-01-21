@@ -1,0 +1,48 @@
+{
+  "border": "normal",
+  "current_border_width": -1,
+  "floating": "auto_off",
+  "fullscreen_mode": 0,
+  "geometry": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "layout": "splith",
+  "name": "2",
+  "orientation": "horizontal",
+  "percent": 0.5,
+  "scratchpad_state": "none",
+  "sticky": false,
+  "type": "workspace",
+  "workspace_layout": "default",
+  "nodes": [
+    {
+      "border": "normal",
+      "current_border_width": 2,
+      "floating": "auto_off",
+      "fullscreen_mode": 0,
+      "geometry": {
+        "x": 0,
+        "y": 64,
+        "width": 1920,
+        "height": 1016
+      },
+      "layout": "splith",
+      "name": "Slack | vesta | deepomatic",
+      "orientation": "none",
+      "percent": 1.0,
+      "scratchpad_state": "none",
+      "sticky": false,
+      "type": "con",
+      "workspace_layout": "default",
+      "swallows": [
+        {
+          "class": "^Slack$",
+          "instance": "^slack$"
+        }
+      ]
+    }
+  ]
+}

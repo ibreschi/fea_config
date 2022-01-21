@@ -1,0 +1,166 @@
+/**
+ * ROFI Color theme
+ * User: Qball
+ * Copyright: Dave Davenport
+ */
+
+configuration {
+
+    // The display name of this browser
+    display-ssh:                   "  ";
+    // The display name of this browser
+    display-run:                    "";
+    // The display name of this browser
+    display-drun:                   "";
+    // The display name of this browser
+    display-window:                 "";
+    display-combi:                  "";
+    show-icons: true;
+}
+
+
+/**
+* http://manpages.ubuntu.com/manpages/bionic/man5/rofi-theme.5.html#layout
+ */
+* {
+    myyellow:  #F4D086;
+    myorange:  #FFA624;
+    myblack:  #020001;
+    myligherblack:  #242321;
+    mywhite:  #FAF3E9;
+    mybackground:  #141414EE; /*base00 + C (80% opacity)*/
+
+    foreground:  @myyellow;
+    backlight:   #ccffeedd;
+    background-color:  transparent;
+    dark: #1c1c1c;
+    // Black
+    black:       #3d352a;
+    lightblack:  #554444;
+    tlightblack:  #554444cc;
+    //
+    // Red
+    red:         #cd5c5c;
+    lightred:    #cc5533;
+    //
+    // Green
+    green:       #86af80;
+    lightgreen:  #88cc22;
+    //
+    // Yellow
+    yellow:      #e8ae5b;
+    lightyellow:     #ffa75d;
+    //
+    // Blue
+    blue:      #6495ed;
+    lightblue:     #87ceeb;
+    //
+    // Magenta
+    magenta:      #deb887;
+    lightmagenta:     #996600;
+    //
+    // Cyan
+    cyan:      #b0c4de;
+    tcyan:      #ccb0c4de;
+    lightcyan:     #b0c4de;
+    //
+    // White
+    white:      #bbaa99;
+    lightwhite:     #ddccbb;
+    //
+    // Bold, Italic, Underline
+    highlight:     underline bold #FFA624;
+
+    transparent: rgba(0,0,0,0);
+    font: "DejaVu Sans Mono, FontAwesome 10";
+    text-color: @mywhite;
+}
+
+// The whole window
+#window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+    border: 2px;
+    border-radius: 2px;
+    border-color: @myyellow;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+// In whole top fixed test + input part
+#inputbar {
+    background-color: @mybackground;
+    font: @font;
+}
+
+// In top the fixed test part
+#prompt {
+    background-color: @myyellow;
+    font: @font;
+    text-color: @myblack;
+    padding: 2px 15px 2px 10px;
+}
+
+// The place where you write the search
+#entry {
+    padding: 2px;
+}
+
+//
+#message {
+}
+
+
+#case-indicator {
+    padding: 2px;
+}
+#listview {
+    padding: 4px;
+    background-color: transparent;
+    background-color: @mybackground;
+    dynamic: false;
+    lines: 20;
+}
+// Any element in the list
+#element {
+    padding: 2px;
+    vertical-align: 0.5;
+    border-radius: 2px;
+    background-color: @myligherblack;
+    font:inherit;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+// the element on which we are currently
+#element selected.normal {
+    background-color: @myyellow;
+    text-color: @myblack;
+}
+#element normal active {
+}
+#element normal urgent {
+}
+#element alternate normal {
+}
+#element alternate active {
+}
+#element alternate urgent {
+}
+#element selected active {
+}
+#element selected urgent {
+}
+#element normal normal {
+}

@@ -1,0 +1,48 @@
+{
+  "border": "normal",
+  "current_border_width": -1,
+  "floating": "auto_off",
+  "fullscreen_mode": 0,
+  "geometry": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "layout": "splith",
+  "name": "3",
+  "orientation": "horizontal",
+  "percent": 0.25,
+  "scratchpad_state": "none",
+  "sticky": false,
+  "type": "workspace",
+  "workspace_layout": "default",
+  "nodes": [
+    {
+      "border": "normal",
+      "current_border_width": 2,
+      "floating": "auto_off",
+      "fullscreen_mode": 0,
+      "geometry": {
+        "x": 0,
+        "y": 0,
+        "width": 900,
+        "height": 668
+      },
+      "layout": "splith",
+      "name": "Inbox (5,095) - iacopo.breschi@deepomatic.com - Deepomatic Mail \u2014 Mozilla Firefox",
+      "orientation": "none",
+      "percent": 1.0,
+      "scratchpad_state": "none",
+      "sticky": false,
+      "type": "con",
+      "workspace_layout": "default",
+      "swallows": [
+        {
+          "class": "^Firefox$",
+          "instance": "^Navigator$"
+        }
+      ]
+    }
+  ]
+}

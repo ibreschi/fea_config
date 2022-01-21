@@ -1,0 +1,134 @@
+
+
+
+
+## Configuring your station:
+
+# Install i3
+```
+  sudo apt install i3
+  sudo apt install jq vim rofi xdotool x11-xserver-utils indent libanyevent-i3-perl
+```
+# Config i3
+```
+```
+
+# Install i3status-rust
+```
+  sudo apt install cargo
+  sudo apt install libdbus-1-dev pkg-config
+  cargo install --git https://github.com/greshake/i3status-rust i3status-rs
+```
+
+# Install font:
+```
+  git clone https://github.com/FortAwesome/Font-Awesome
+  mkdir ~/.fonts/
+  cp otfs/* ~/.fonts/
+  sudo fc-cache -f -v
+  i3 restart
+
+  sudo apt-get install fonts-powerline
+```
+# Poweline
+```
+  pip install td-watson
+```
+
+## i3 session
+
+# Save
+$mod+s
+
+# Restore
+$mod+n then 1 2 3 4 5
+
+
+# Restart 
+$mode+Shift+r
+
+# audio
+HACK to restore audio after clicking on audio
+```
+  alsactl restore#
+```
+
+# Install alacritty
+https://github.com/alacritty/alacritty/blob/master/INSTALL.md
+apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+cargo install alacritty
+# copy the mans from github
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /home/ibreschi/.cargo/bin/alacritty 50
+
+# TODO copy here the alacritty.yml
+
+# Install Vim
+# TODO copy here the vimrc
+
+# Install Byobu
+
+# TODO copy here the profile
+.byobu/status
+/usr/share/byobu/profiles/tmux
+
+
+
+sudo apt install nitrogen6
+
+feh  --bg-scale '/home/username/Pictures/image.jpg'
+
+  8 client.focused          #D1C089 #F8E9CA #141414 #F8E9CA   #F8E9CA
+  7 client.focused_inactive #2B2B2B #A38A62 #FFFFFF #778184   #5F676A
+
+
+## Colors
+
+
+
+## Bluetoot
+
+sudo apt install bluez-tools
+
+
+## VPN: 
+
+wget -O - https://repo.fortinet.com/repo/6.4/ubuntu/DEB-GPG-KEY | sudo apt-key add -
+sudo echo "deb [arch=amd64] https://repo.fortinet.com/repo/6.4/ubuntu/ /bionic multiverse" >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt install forticlient
+
+
+sudo openfortivpn vpn.deepomatic.com:10443 -u iacopo --trusted-cert 287c33fbc5f8181b858f91f7ef7f18618887a02304d623192a0b2588d57f0715 
+
+>NyTZRx=3ej{FmSc
+
+maxline='pgrep openfortivpn'; if [ $maxline == "#SystemMaxUse=" ]; then echo "forti on "; else echo "forti off"; fi
+
+(pgrep openfortivpn && echo "forti on" && ssh acacia) || echo "forti off" && deepo_vpn && ssh acacia;
+
+Use cases:
+
+# run command
+special d
+
+# Vim to frequently used directories:
+ctrl-f name
+
+
+# Vim to frequently used directories:
+
+
+
+# Fuzzy find in Vim (we use fzf)
+
+## find files 
+ctrl-p 
+
+## open in a new tab
+ctrl-p text ctrl-t 
+
+## open in a new vertical split
+ctrl-p text ctrl-v
+
+## open in a new horiz split
+ctrl-p text ctrl-x

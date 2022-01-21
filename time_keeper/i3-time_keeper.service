@@ -1,0 +1,8 @@
+[Unit]
+After=i3-time_keeper.service
+
+[Service]
+ExecStart=python3 /home/ibreschi/git/fea_config/time_keeper/i3_time_keeper.py
+
+[Install]
+WantedBy=default.target

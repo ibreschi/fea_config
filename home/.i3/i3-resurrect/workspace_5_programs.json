@@ -1,0 +1,11 @@
+[
+  {
+    "command": [
+      "/opt/sublime_text/sublime_text",
+      "--detached",
+      "--fwdargv0",
+      "/usr/bin/subl"
+    ],
+    "working_directory": "/home/ibreschi"
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "border": "normal",
+  "current_border_width": -1,
+  "floating": "auto_off",
+  "fullscreen_mode": 1,
+  "geometry": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "layout": "splith",
+  "name": "5",
+  "orientation": "horizontal",
+  "percent": null,
+  "scratchpad_state": "none",
+  "sticky": false,
+  "type": "workspace",
+  "workspace_layout": "default",
+  "nodes": [
+    {
+      "border": "pixel",
+      "current_border_width": 4,
+      "floating": "auto_off",
+      "fullscreen_mode": 0,
+      "geometry": {
+        "x": 960,
+        "y": 21,
+        "width": 952,
+        "height": 1051
+      },
+      "layout": "splith",
+      "name": "~/git/fea_config/station_config.txt \u2022 - Sublime Text (UNREGISTERED)",
+      "orientation": "none",
+      "percent": 1.0,
+      "scratchpad_state": "none",
+      "sticky": false,
+      "type": "con",
+      "workspace_layout": "default",
+      "swallows": [
+        {
+          "class": "^Sublime_text$",
+          "instance": "^sublime_text$"
+        }
+      ]
+    }
+  ]
+}

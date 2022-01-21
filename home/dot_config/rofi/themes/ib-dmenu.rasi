@@ -1,0 +1,66 @@
+/**
+ * ROFI Color theme
+ * NAME: dt-dmenu.rasi
+ * DESCRIPTION: This is a horizontal prompt similar to dmenu.
+ * AUTHOR: Derek Taylor (DT)
+ */
+
+// -sb '#F4D086' -nhb '#FFA624' -nhf '#020001' -shb '#FFA624' -shf '#020001'"
+* {
+    font: 'ComicSans 10'
+    background-color:           #FFA624;
+    border-color:               #F4D086;
+    text-color:                 #bbc2c;
+    prompt-background:          #F4D086;
+    prompt-foreground:          #554444;
+    prompt-padding:             3px;
+    selected-normal-background: #F4D086;
+    selected-normal-foreground: #020001;
+}
+#window {
+  border:  0px;
+  border-radious: 10px;
+  border-color: @border-color;
+}
+/*
+#horibox {
+    orientation: horizontal;
+    children: [ prompt, entry, listview ];
+}
+*/
+#prompt {
+    padding:          @prompt-padding;
+    background-color: @prompt-background;
+    text-color:       @prompt-foreground;
+}
+/*
+#listview {
+    layout: horizontal;
+    lines: 100;
+}
+#entry {
+    padding: 2px;
+    expand: false;
+    width: 10em;
+}
+#element {
+    padding: 2px 8px;
+}
+#element selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+*/
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+/* Not actually relevant for this configuration, but it might
+be useful to someone having issues with their icons' background color
+
+element-icon {
+    background-color: inherit;
+}
+*/
