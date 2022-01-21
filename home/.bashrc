@@ -84,9 +84,9 @@ parse_git_branch() {
 
 if [ "$color_prompt" = yes ]; then
     # gray icon, blue directory, green git, yellow dollar
-    PS1="\e[5;33m⏺ \e[m\e[1;34m\W\e[m\e[1;32m\$(parse_git_branch)\e[m\e[0;33m \\$\e[m\[$(tput sgr0)\] "
+    PS1="\e[5;33m• \e[m\e[1;34m\W\e[m\e[1;32m\$(parse_git_branch)\e[m\e[0;33m \\$\e[m\[$(tput sgr0)\] "
 else
-    PS1="⏺ \W\$(parse_git_branch) \\$\[$(tput sgr0)\] "
+    PS1="• \W\$(parse_git_branch) \\$\[$(tput sgr0)\] "
 fi
 unset color_prompt force_color_prompt
 
@@ -103,9 +103,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -119,9 +116,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/ibreschi/google-cloud-sdk/path.bash.inc' ]; then . '/home/ibreschi/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/ibreschi/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ibreschi/google-cloud-sdk/completion.bash.inc'; fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -156,6 +155,11 @@ if [ $? -eq 0 ]; then
     source $venvwrap
 fi
 
+
+export PYTHONSTARTUP=~/.pythonrc
+export EDITOR='vim'
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # Deepomatic related stuff
 export MAKEFLAGS="-j $(($(nproc) / 4))"
 export DMAKE_UID=0
@@ -168,26 +172,10 @@ export DMAKE_GITHUB_OWNER=deepomatic
 export GPU_MEMORY_FRACTION=0.15
 source /home/ibreschi/.dmake/config.sh
 
-
-export PYTHONSTARTUP=~/.pythonrc
-export PATH=$PATH:/home/ibreschi/Deepomatic/balena/balena-cli/
-export EDITOR='vim'
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export VAULT_ADDR=https://vault.stag.k8s.deepomatic.com
 source <(kubectl completion bash)
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/ibreschi/google-cloud-sdk/path.bash.inc' ]; then . '/home/ibreschi/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/ibreschi/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ibreschi/google-cloud-sdk/completion.bash.inc'; fi
 . "$HOME/.cargo/env"
 source /home/ibreschi/git/alacritty/extra/completions/alacritty.bash
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Run tmp scripts
-bind '"\C-e": edit-and-execute-command'
-
-# Run session on dir
-bind -x '"\C-f": ~/.local/bin/byobu-sessionizer'

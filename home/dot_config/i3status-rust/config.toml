@@ -9,10 +9,6 @@ good_bg = "#34B068"
 [icons]
 name = "awesome"
 
-[[block]]
-block = "custom"
-command = "tail -1 /home/ibreschi/.i3_time_keeper | awk -F',' '{\"date -u +%H:%M -d@\" $2 |& getline $2; \"date -u +%H:%M -d@\" $3 |& getline $3; print \"\uf24e work: \"$2 \" pers: \" $3}'"
-watch_files = ["/home/ibreschi/.i3_time_keeper"]
 
 [[block]]
 block = "cpu"
@@ -37,7 +33,8 @@ driver = "alsa"
 
 [[block]]
 block = "bluetooth"
-mac = "E3:80:35:01:36:AC"
+mac = "E3:80:35:80:36:AC"
+# mac = "E3:80:35:01:36:AC"
 format = "HHKB"
 format_unavailable = "HHKB X"
 
@@ -45,6 +42,11 @@ format_unavailable = "HHKB X"
 block = "time"
 interval = 5
 format = "%R %d/%m"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
 
 [[block]]
 block = "custom"
