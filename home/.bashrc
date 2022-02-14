@@ -84,7 +84,7 @@ parse_git_branch() {
 
 if [ "$color_prompt" = yes ]; then
     # gray icon, blue directory, green git, yellow dollar
-    PS1="\e[5;33m• \e[m\e[1;34m\W\e[m\e[1;32m\$(parse_git_branch)\e[m\e[0;33m \\$\e[m\[$(tput sgr0)\] "
+    PS1="\[\e[5;33m\]•\[\e[m\] \[\e[1;34m\]\W\[\e[m\]\[\e[1;32m\]\$(parse_git_branch)\[\e[m\] \[\e[0;33;40m\]\\$\[\e[m\] \[$(tput sgr0)\]"
 else
     PS1="• \W\$(parse_git_branch) \\$\[$(tput sgr0)\] "
 fi
