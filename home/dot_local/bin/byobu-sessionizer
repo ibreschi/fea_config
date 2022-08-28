@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selected=$(find ~/Deepomatic/git/ -mindepth 1 -maxdepth 1 -type d | fzf)
+selected=$(find ~/Deepomatic/git/ ~/git/ -mindepth 1 -maxdepth 1 -type d | fzf)
 
 if [[ -z $selected ]]; then
     exit 0
