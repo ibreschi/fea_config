@@ -202,11 +202,10 @@ def track_my_time():
 class FocusWatcher:
     def __init__(self, controller):
         self.controller = controller
-
-        self.i3 = Connection()
+        self.i3 = Connection(auto_reconnect=True)
         self.i3.on(Event.WORKSPACE_FOCUS, self.on_workspace_focus)
         self.i3.on(Event.TICK, self.on_tick)
-        self.i3.on(Event.SHUTDOWN, self.controller.write_record)
+        self.i3.on(Event.SHUTDOWN, self.on_shutdown)
         self.rt = RepeatedTimer(3, self.i3.send_tick)
         self.i3.main()
 
@@ -221,6 +220,16 @@ class FocusWatcher:
         else:
             self.controller.write_record()
 
+    def on_shutdown(self, i3conn, e):
+        self.controller.write_record()
+
 
 with track_my_time() as controller:
-    FocusWatcher(controller)
+    watcher = None
+    for i in range(10):
+        try:
+            watcher = FocusWatcher(controller)
+            break
+        except Exception as e:
+            print('retying after ', e)
+            time.sleep(60)
