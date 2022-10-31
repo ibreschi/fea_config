@@ -1,5 +1,5 @@
 [theme]
-name = "bad-wolf"
+theme = "bad-wolf"
 [theme.overrides]
 idle_bg = "#1C1B19"
 critical_bg = "#FF2C4C"
@@ -7,46 +7,47 @@ warning_bg = "#FFA624"
 good_bg = "#34B068"
 
 [icons]
-name = "awesome"
+icons = "awesome"
 
 [[block]]
 block = "custom"
 if_command = "test -f /home/ibreschi/.i3_time_keeper"
 command = "tail -1 /home/ibreschi/.i3_time_keeper | awk -F',' '{\"date -u +%H:%M -d@\" $2 |& getline $2; \"date -u +%H:%M -d@\" $3 |& getline $3; print \"\uf0c1: \"$2 \" \uf127: \" $3}'"
-watch_files = ["/home/ibreschi/.i3_time_keeper"]
+interval = 60
+
 
 [[block]]
 block = "cpu"
-interval = 1
-format = "cpu:{utilization}"
+interval = 2
+format = " $icon cpu:$utilization"
 
 [[block]]
 block = "memory"
-display_type = "memory"
-format_mem = "mem:{mem_used_percents}"
-format_swap = "swp:{swap_used_percents}"
+format = " $icon mem:$mem_used_percents.eng(2)"
+format_alt = "$icon_swap swp:$swap_used_percents.eng(2)"
 
 [[block]]
 block = "disk_space"
-format = "{icon} disk:{available}"
+format = " $icon disk:$available"
 
 [[block]]
 block = "sound"
 step_width = 3
 device = "hw:0"
 driver = "alsa"
+format = " $icon {$volume|} "
 
 [[block]]
 block = "bluetooth"
 mac = "E3:80:35:80:36:AC"
 # mac = "E3:80:35:01:36:AC"
-format = "HHKB"
-format_unavailable = "HHKB X"
+format = " HHKB"
+disconnected_format = " HHKB X"
 
 [[block]]
 block = "time"
-interval = 5
-format = "%R %d/%m"
+interval = 60
+format = " %R %d/%m"
 
 [[block]]
 block = "battery"
@@ -55,6 +56,5 @@ format = "{percentage} {time}"
 
 [[block]]
 block = "custom"
-command = "echo \uf011" # assumes fontawesome icons
-on_click = "systemctl `echo -e 'suspend\npoweroff\nreboot' | dmenu`"
+cycle = ["echo \uf011", "systemctl `echo -e 'suspend\npoweroff\nreboot' | dmenu`"]
 interval = "once"
