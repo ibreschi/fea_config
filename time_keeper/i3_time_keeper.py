@@ -30,6 +30,34 @@ class Clock:
         return self.elapsed_time
 
 
+class RepeatedTimer(object):
+    def __init__(self, interval, function, *args, **kwargs):
+        self._timer = None
+        self.interval = interval
+        self.function = function
+        self.args = args
+        self.kwargs = kwargs
+        self.is_running = False
+        self.next_call = time.time()
+        self.start()
+
+    def _run(self):
+        self.is_running = False
+        self.start()
+        self.function(*self.args, **self.kwargs)
+
+    def start(self):
+        if not self.is_running:
+            self.next_call += self.interval
+            self._timer = threading.Timer(self.next_call - time.time(), self._run)
+            self._timer.start()
+            self.is_running = True
+
+    def stop(self):
+        self._timer.cancel()
+        self.is_running = False
+
+
 class ReadWrtier:
     FIELDS = ['date', 'work', 'personal', 'elses']
 
@@ -73,16 +101,19 @@ class Controller:
     WORK_WORKSPACES = ['1', '2', '3', '5']
     PERSO_WORKSPACES = ['4']
 
-    def __init__(self):
-        self.rw = ReadWrtier('/home/ibreschi/.i3_time_keeper')
+    def __init__(self, config_file):
+        self.rw = ReadWrtier(config_file)
         self.set_today()
 
-        # Should this two object be tread safe?
+        # Time pools is written by one thread and read by one other. It should be locked
         self.time_pools = self._take_today_entry()
         self.clocks = {}
         self.prev_workspace = None
 
         self.lock = threading.Lock()
+
+    def init(self):
+        print('Welcome in WorkTracker')
 
     def set_today(self):
         today = date.today()
@@ -102,41 +133,39 @@ class Controller:
             self.rw.appendline_csv(self.today_date, 0, 0, 0)
             return {'Work': 0, 'Personal': 0, 'Elses': 0}
 
-    def has_clock(self, name):
-        return name in self.clocks
+    def start_clock(self, name):
+        if name not in self.clocks:
+            # To init the clocks in case we do not have them
+            self.clocks[name] = Clock()
+        self.clocks[name].start()
 
-    def add_clock(self, name, value):
-        self.clocks[name] = value
-
-    def get_clock(self, name):
-        return self.clocks[name]
-
-    def add_to_time_pool(self, name, duration):
-        with self.lock:
-            if name not in self.time_pools:
-                self.time_pools[name] = 0
-            self.time_pools[name] += duration
+    def stop_clock(self, name):
+        self.clocks[name].stop()
+        return self.clocks[name].get_elapsed_time()
 
     def track(self, name, duration):
-        if name in self.WORK_WORKSPACES:
-            self.add_to_time_pool('Work', duration)
-        elif name in self.PERSO_WORKSPACES:
-            self.add_to_time_pool('Personal', duration)
-        else:
-            self.add_to_time_pool('Elses', duration)
+        with self.lock:
+            if name in self.WORK_WORKSPACES:
+                self.time_pools['Work'] += duration
+            elif name in self.PERSO_WORKSPACES:
+                self.time_pools['Personal'] += duration
+            else:
+                self.time_pools['Elses'] += duration
 
-    def print_stats(self):
-        for k, v in self.time_pools.items():
-            print("On {} passed {}".format(k, v))
+    def get_times(self):
+        with self.lock:
+            work = int(self.time_pools['Work'])
+            perso = int(self.time_pools['Personal'])
+            elses = int(self.time_pools['Elses'])
+        return work, perso, elses
 
-    def update_entries(self):
+    def write_record(self):
         """
-        Log today time.
+        Write to file log time.
         """
-        work_time = int(self.time_pools['Work'])
-        perso_time = int(self.time_pools['Personal'])
-        elses_time = int(self.time_pools['Elses'])
-        self.rw.updateline_csv(self.today_date, work_time, perso_time, elses_time)
+
+        work, perso, elses = self.get_times()
+        self.rw.updateline_csv(self.today_date, work, perso, elses)
 
         today = date.today()
         new_today_date = today.strftime("%d/%m/%Y")
@@ -145,73 +174,62 @@ class Controller:
             self.rw.appendline_csv(new_today_date, 0, 0, 0)
             self.set_today()
 
-    def do_logic(self, workspace_name):
-        if not self.prev_workspace:
-            # First time:
-            clock = Clock()
-            clock.start()
-            self.add_clock(workspace_name, clock)
-        else:
-            # Other times:
+    def track_time(self, workspace_name):
+        """
+        Measure time passed in workspaces.
+        """
+        if self.prev_workspace:
             # We changed workspace so we stop the clock in wich we were previouslly
-            clock = self.get_clock(self.prev_workspace)
-            clock.stop()
-            elapsed_time = clock.get_elapsed_time()
-            print(workspace_name, elapsed_time)
+            elapsed_time = self.stop_clock(self.prev_workspace)
+            print("Passed", elapsed_time, 'in workspace:', self.prev_workspace)
             self.track(self.prev_workspace, elapsed_time)
 
-            if not self.has_clock(workspace_name):
-                clock = Clock()
-                self.add_clock(workspace_name, clock)
-
-            clock = self.get_clock(workspace_name)
-            clock.start()
+        # We now start one
+        print("Starting new timer for workspace:", workspace_name)
+        self.start_clock(workspace_name)
         self.prev_workspace = workspace_name
 
 
 @contextmanager
 def track_my_time():
-    c = Controller()
+    c = Controller('/home/ibreschi/.i3_time_keeper', )
     try:
         yield c
     finally:
-        c.update_entries()
+        c.write_record()
 
 
 class FocusWatcher:
-
     def __init__(self, controller):
         self.controller = controller
-
-        self.tick_time = 3
-        self.i3 = Connection()
+        self.i3 = Connection(auto_reconnect=True)
         self.i3.on(Event.WORKSPACE_FOCUS, self.on_workspace_focus)
-        self.i3.on(Event.SHUTDOWN, self.on_exit)
-
-    def run(self):
-        t_i3 = threading.Thread(target=self._launch_i3)
-        t_server = threading.Thread(target=self._launch_server)
-        for t in (t_i3, t_server):
-            t.start()
-
-    def on_workspace_focus(self, i3conn, e):
-        # The first parameter is the connection to the ipc and the second is an object
-        # with the data of the event sent from i3.
-        if e.current:
-            self.controller.do_logic(e.current.name)
-
-    def on_exit(self, i3conn, e):
-        self.controller.update_entries()
-
-    def _launch_i3(self):
+        self.i3.on(Event.TICK, self.on_tick)
+        self.i3.on(Event.SHUTDOWN, self.on_shutdown)
+        self.rt = RepeatedTimer(3, self.i3.send_tick)
         self.i3.main()
 
-    def _launch_server(self):
-        while True:
-            time.sleep(self.tick_time)
-            self.controller.update_entries()
+    def on_workspace_focus(self, i3conn, e):
+        if e.current:
+            self.controller.track_time(e.current.name)
+
+    def on_tick(self, i3conn, e):
+        if e.first:
+            # We do not write_record as it will be done already by on_workspace_focus
+            self.controller.init()
+        else:
+            self.controller.write_record()
+
+    def on_shutdown(self, i3conn, e):
+        self.controller.write_record()
 
 
 with track_my_time() as controller:
-    focus_watcher = FocusWatcher(controller)
-    focus_watcher.run()
+    watcher = None
+    for i in range(10):
+        try:
+            watcher = FocusWatcher(controller)
+            break
+        except Exception as e:
+            print('retying after ', e)
+            time.sleep(60)

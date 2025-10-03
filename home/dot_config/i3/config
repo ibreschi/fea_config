@@ -211,7 +211,7 @@ client.background       #141414
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:DejaVu Sans Mono, FontAwesome 10
+    font pango:DejaVu Sans Mono, FontAwesome 12
     position top
     status_command /home/ibreschi/.cargo/bin/i3status-rs /home/ibreschi/.config/i3status-rust/config.toml
     colors {
@@ -261,5 +261,7 @@ mode "restore" {
 }
 
 bindsym $mod+n mode "restore"
+
+bindsym $mod+Shift+a exec "/home/ibreschi/.i3/i3-resurrect/all.sh"
 
 for_window [class="^.*"] border pixel 4

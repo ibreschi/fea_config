@@ -1,0 +1,278 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "0x60615d"
+blue = "0x00a6fb"
+cyan = "0x0dd9d6"
+green = "0x02d849"
+magenta = "0xf15ee3"
+red = "0xf11235"
+white = "0xfcfcfc"
+yellow = "0xffb627"
+
+[colors.cursor]
+cursor = "0xf8f8f2"
+text = "0x232629"
+
+[colors.dim]
+black = "0x31363b"
+blue = "0x1b668f"
+cyan = "0x186c60"
+green = "0x17a262"
+magenta = "0x614a73"
+red = "0x783228"
+white = "0x63686d"
+yellow = "0xb65619"
+
+[[colors.indexed_colors]]
+color = "0xff9505"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xb27701"
+index = 17
+
+[[colors.indexed_colors]]
+color = "0x333b3d"
+index = 18
+
+[[colors.indexed_colors]]
+color = "0x484e54"
+index = 19
+
+[[colors.indexed_colors]]
+color = "0xc0c0bd"
+index = 20
+
+[[colors.indexed_colors]]
+color = "0xfcfcf6"
+index = 21
+
+[colors.normal]
+black = "0x232629"
+blue = "0x00a6fb"
+cyan = "0x0dd9d6"
+green = "0x02d849"
+magenta = "0xf15ee3"
+red = "0xf11235"
+white = "0xf8f8f2"
+yellow = "0xffb627"
+
+[colors.primary]
+background = "0x232629"
+foreground = "0xf8f8f2"
+
+[colors.search.focused_match]
+background = "CellForeground"
+foreground = "CellBackground"
+
+[colors.search.matches]
+background = "0xb26818"
+foreground = "0xb2b2b2"
+
+[colors.selection]
+background = "#f2f2f2"
+text = "#403f53"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10.0
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 1
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\f"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+# [schemes.DoomOne.bright]
+# black = "0x60615d"
+# blue = "0x00a6fb"
+# cyan = "0x0dd9d6"
+# green = "0x02d849"
+# magenta = "0xf15ee3"
+# red = "0xf11235"
+# white = "0xfcfcfc"
+# yellow = "0xffb627"
+
+# [schemes.DoomOne.cursor]
+# cursor = "0xf8f8f2"
+# text = "0x232629"
+#
+# [schemes.DoomOne.dim]
+# black = "0x31363b"
+# blue = "0x1b668f"
+# cyan = "0x186c60"
+# green = "0x17a262"
+# magenta = "0x614a73"
+# red = "0x783228"
+# white = "0x63686d"
+# yellow = "0xb65619"
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0xff9505"
+# index = 16
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0xb27701"
+# index = 17
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0x333b3d"
+# index = 18
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0x484e54"
+# index = 19
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0xc0c0bd"
+# index = 20
+#
+# [[schemes.DoomOne.indexed_colors]]
+# color = "0xfcfcf6"
+# index = 21
+#
+# [schemes.DoomOne.normal]
+# black = "0x232629"
+# blue = "0x00a6fb"
+# cyan = "0x0dd9d6"
+# green = "0x02d849"
+# magenta = "0xf15ee3"
+# red = "0xf11235"
+# white = "0xf8f8f2"
+# yellow = "0xffb627"
+#
+# [schemes.DoomOne.primary]
+# background = "0x232629"
+# foreground = "0xf8f8f2"
+#
+# [schemes.DoomOne.search.focused_match]
+# background = "CellForeground"
+# foreground = "CellBackground"
+#
+# [schemes.DoomOne.search.matches]
+# background = "0xb26818"
+# foreground = "0xb2b2b2"
+#
+# [schemes.DoomOne.selection]
+# background = "#f2f2f2"
+# text = "#403f53"
+
+[scrolling]
+history = 50000
+
+[window]
+dynamic_padding = false
+opacity = 1.0
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 2
+y = 2
+
+[keyboard]
