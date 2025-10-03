@@ -2,18 +2,22 @@
 
 # basic
 ```
+sudo apt install build-essential
 sudo apt install pip
 sudo apt install fzf
 sudo apt install curl
+sudo apt install rustup
 sudo apt install silversearcher-ag
 cargo install git-delta
 sudo apt install translate-shell
 sudo apt install byobu
+sudo apt install feh
 ```
 # Install i3
 ```
-  sudo apt install i3
-  sudo apt install jq vim rofi xdotool x11-xserver-utils indent libanyevent-i3-perl
+sudo apt install i3
+sudo apt install jq vim rofi xdotool x11-xserver-utils indent libanyevent-i3-perl
+pip3 install --user --upgrade i3-resurrect
 ```
 # Config i3
 ```
@@ -25,6 +29,10 @@ sudo apt install byobu
   source $HOME/.cargo/env && rustup default nightly && rustup update
   sudo apt install libdbus-1-dev pkg-config libsensors-dev libssl-dev
   cargo install --git https://github.com/greshake/i3status-rust i3status-rs
+
+
+  in the git repo
+  cp -r files/* ~/.local/share/i3status-rust/
 ```
 
 # Install font:
@@ -39,7 +47,7 @@ sudo apt install byobu
 
 # Poweline
 ```
-  pip install td-watson
+  pip install td-watson --break-system-packages
 ```
 
 ## Bluetoot
@@ -77,10 +85,12 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emula
 # TODO copy here the alacritty.yml
 
 # Install Vim
-sudo apt install vim ctags
+sudo apt install vim universal-ctags
 mkdir ~/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ## in vim :VundleInstall
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install Byobu
 
@@ -110,6 +120,7 @@ sudo apt-get update
 sudo apt install forticlient
 
 
+sudo openfortivpn vpn.deepomatic.com:10443 -u iacopo --trusted-cert 287c33fbc5f8181b858f91f7ef7f18618887a02304d623192a0b2588d57f0715
 
 maxline='pgrep openfortivpn'; if [ $maxline == "#SystemMaxUse=" ]; then echo "forti on "; else echo "forti off"; fi
 
@@ -117,3 +128,11 @@ maxline='pgrep openfortivpn'; if [ $maxline == "#SystemMaxUse=" ]; then echo "fo
 
 
 xrandr --output eDP-1  --mode 1680x1050
+
+
+
+# Firefox shortcuts
+
+ctrl t  # open tab
+ctrl w  # close tab
+ctrl tab  # next tab

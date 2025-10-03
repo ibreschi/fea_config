@@ -1,60 +1,68 @@
+icons_format = "{icon}"
+
 [theme]
 theme = "bad-wolf"
 [theme.overrides]
+# idle_fg = "#abcdef"
 idle_bg = "#1C1B19"
 critical_bg = "#FF2C4C"
 warning_bg = "#FFA624"
 good_bg = "#34B068"
 
 [icons]
-icons = "awesome"
+icons = "awesome5"
 
 [[block]]
 block = "custom"
 if_command = "test -f /home/ibreschi/.i3_time_keeper"
 command = "tail -1 /home/ibreschi/.i3_time_keeper | awk -F',' '{\"date -u +%H:%M -d@\" $2 |& getline $2; \"date -u +%H:%M -d@\" $3 |& getline $3; print \"\uf0c1: \"$2 \" \uf127: \" $3}'"
-interval = 60
-
+watch_files = ["/home/ibreschi/.i3_time_keeper"]
 
 [[block]]
 block = "cpu"
-interval = 2
-format = " $icon cpu:$utilization"
+info_cpu = 20
+format = "$icon:$utilization"
 
 [[block]]
 block = "memory"
-format = " $icon mem:$mem_used_percents.eng(2)"
-format_alt = "$icon_swap swp:$swap_used_percents.eng(2)"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
 
 [[block]]
 block = "disk_space"
-format = " $icon disk:$available"
+format = "$icon disk:$available"
 
 [[block]]
 block = "sound"
 step_width = 3
 device = "hw:0"
-driver = "alsa"
-format = " $icon {$volume|} "
+# driver = "alsa"
 
 [[block]]
 block = "bluetooth"
 mac = "E3:80:35:80:36:AC"
-# mac = "E3:80:35:01:36:AC"
-format = " HHKB"
-disconnected_format = " HHKB X"
+format = "$icon"
+disconnected_format = ""
 
 [[block]]
 block = "time"
-interval = 60
-format = " %R %d/%m"
+interval = 5
+format = "$icon $timestamp.datetime(f:'%a %d/%m %R') "
 
 [[block]]
 block = "battery"
 interval = 10
-format = "{percentage} {time}"
+format = "$icon $percentage $time"
+
+[[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "
 
 [[block]]
 block = "custom"
-cycle = ["echo \uf011", "systemctl `echo -e 'suspend\npoweroff\nreboot' | dmenu`"]
+command = "echo \uf011" # assumes fontawesome icons
 interval = "once"
+
+[[block.click]]
+button = "left"
+cmd = "systemctl `echo -e 'suspend\npoweroff\nreboot' | dmenu`"
