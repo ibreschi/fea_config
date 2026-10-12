@@ -1,0 +1,19 @@
+# Additional Ubuntu packages for the development profile.
+cmake
+ninja-build
+python3-dev
+libpq-dev
+default-jdk
+ansible-core
+httpie
+dnsutils
+net-tools
+netcat-openbsd
+nmap
+postgresql-client
+redis-tools
+graphviz
+pandoc
+imagemagick
+libimage-exiftool-perl
+openfortivpn
