@@ -1,0 +1,4 @@
+# Private migration archives must never be published.
+*.tar.gz.gpg
+*.migration.gpg
+__pycache__/
